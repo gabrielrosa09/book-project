@@ -1,12 +1,15 @@
 /* Configurações Gerais e Fundo */
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
-    font-family: 'Lato', sans-serif; /* Fonte limpa para textos */
-    background: linear-gradient(135deg, #fce4ec, #e3f2fd); /* Gradiente de rosa para azul pastel */
+    padding: 20px 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+    background: linear-gradient(135deg, #fce4ec, #e3f2fd);
     color: #444;
     overflow: hidden;
 }
@@ -19,41 +22,44 @@ body {
     max-height: 800px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     position: relative;
-    perspective: 1500px; /* Para efeito 3D ao virar a página (futuro) */
+    perspective: 1500px;
+    flex-shrink: 0;
 }
 
-/* Estilo Padrão das Páginas */
+/* Estilo Padrão das Páginas (CORRIGIDO) */
 .pagina {
     position: absolute;
     width: 100%;
     height: 100%;
     background: #ffffff;
-    display: none; /* Esconde todas as páginas */
+    display: none;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start; /* Alinha o conteúdo ao topo para facilitar a rolagem */
     align-items: center;
     padding: 40px;
     box-sizing: border-box;
     text-align: center;
     font-size: 1.1em;
     line-height: 1.6;
+    overflow-y: auto; /* Adiciona barra de rolagem vertical APENAS se necessário */
 }
 
 .pagina.ativa {
-    display: flex; /* Mostra apenas a página ativa */
+    display: flex;
 }
 
 /* Estilos de Texto */
 h1, h2 {
-    font-family: 'Playfair Display', serif; /* Fonte elegante para títulos */
-    color: #d81b60; /* Um tom de rosa mais forte */
+    font-family: 'Playfair Display', serif;
+    color: #d81b60;
     margin-bottom: 20px;
+    flex-shrink: 0; /* Impede que os títulos encolham */
 }
 
 .citacao {
     font-style: italic;
     font-size: 1.2em;
-    color: #1e88e5; /* Um tom de azul */
+    color: #1e88e5;
     margin: 20px 0;
     padding: 0 20px;
 }
@@ -78,6 +84,7 @@ li {
 #capa {
     background: linear-gradient(135deg, #ff80ab, #4fc3f7);
     color: white;
+    justify-content: center; /* Centraliza o conteúdo da capa, que é curto */
 }
 
 #capa h1 {
@@ -92,18 +99,17 @@ li {
 }
 
 /* Player de Música */
-#pagina-musica audio {
+#pagina-musica iframe {
     width: 80%;
     margin-top: 20px;
+    border-radius: 12px;
 }
 
 /* Botões de Navegação */
 .navegacao {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
     z-index: 10;
+    margin-top: 25px;
+    text-align: center;
 }
 
 button {
@@ -130,4 +136,65 @@ button:disabled {
     color: #666666;
     cursor: not-allowed;
     border-color: #cccccc;
+}
+
+/* ============================================== */
+/* ESTILOS PARA RESPONSIVIDADE                    */
+/* ============================================== */
+@media (max-width: 400px) {
+    body {
+        font-size: 14px;
+        padding: 15px 0; /* Ajusta o padding do corpo */
+    }
+
+    #livro {
+        width: 95vw;
+        height: auto;
+        min-height: 75vh;
+    }
+
+    .pagina {
+        padding: 25px 20px; /* Ajusta padding da página */
+        font-size: 1em;
+    }
+
+    h1, h2 {
+        margin-bottom: 15px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .citacao {
+        font-size: 1.1em;
+        padding: 0 10px;
+    }
+
+    li {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+
+    .navegacao {
+        margin-top: 20px;
+    }
+
+    .navegacao button {
+        padding: 10px 20px;
+        font-size: 14px;
+        margin: 0 5px;
+    }
+
+    #pagina-musica iframe {
+        width: 90%;
+    }
+
+    #capa h1 {
+        font-size: 2.8em;
+    }
+
+    .subtitulo-capa {
+        font-size: 1.1em;
+    }
 }
